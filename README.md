@@ -9,8 +9,8 @@ Data Structures and algorithms is the important part of computer programming.Bec
 ### Index
 
 - [Inroduction of DSA](#Inroduction_of_DSA)
-  - [Algorthims](#algorithm)
-  - [Data Structures](#Data_Structure)
+  - [Algorithm](#algorithms)
+  - [Data Structure](#Data_Structures)
 - [Complaxity](#complaxity)
   - [Time Complaxity](#Time_Complaxity)
   - [Space Complaxity](#Space_Complaxity)
@@ -22,14 +22,21 @@ Data Structures and algorithms is the important part of computer programming.Bec
     - [O(n^2)](<#O(n^2)>)
     - [O(2^n)](<#O(2^n)>)
     - [O(n!)](<#O(n!)>)
+- [Data Structure](#Data_Structure)
+- [Algorithm](#Algorithm)
+  - [Searching Algorithms](#Searching_Algorithms)
+    - [Linear Search](#Linear_Search)
+      - [Linear Search](#linear_search)
+      - [Binary Search](#binary_search)
 
 # Introduction_of_DSA
 
 Let's got to introduce data structures and algorithms.
 
-## Algorithm
+## Algorithms
 
 **_What is Algorithms ?_**
+
 In computer programming terms, an algorithms is a set of well-defined instruction to solve a particular problem. It take a set of input and produces a desired output.
 
 **_For example :_**
@@ -46,7 +53,7 @@ An algorithms add two numbers :
 3. Algorithms should be effective among many different ways to solve a problem.
 4. An algorithms should not include computer code. Instead algorithms should be written in such a way that it can be used in different programming language.
 
-# Data_Structure
+# Data_Structures
 
 **_What are Data Structures ?_**
 
@@ -436,3 +443,206 @@ int sum_two(int size,int array[size][size][size]){
 ```
 
     O(n^2) mean Quadratic Time
+
+# Data_Structure
+
+![Data Structues](./asset/icon/c-data-structures.svg)
+
+# Algorithm
+
+![Algorithms](./asset/icon/c-algorithms.svg)
+
+What is Algorithms ? In computer programming terms, an algorithms is a set of well-defined instruction to solve a particular problem. It take a set of input and produces a desired output.
+
+## Searching_Algorithms
+
+![Searching_Algorithms](./asset/icon/algorithms-searching.svg)
+
+Searching Algorithm are designed to check for an element or retrieve an element from any data structure where it is stored. Based on the type of search operation, these algorithms are generally classified into two categories :
+
+1. **_Sequential Search :_** In this, the list or array is traversed sequentially and every element is checked.For example : **_Linear Search_**
+
+2. **_Interval Search :_** These algorithms are specifially designed for searching in sorted data-structures. These type of searching algorithms are much more effcient than linear search as they repeatedly target the center of the search structure and divide the search space in half. For Example : **_Binary Search_**
+
+## Linear_Search
+
+![Linear-Search](./asset/icon/algorithms-linear-search.svg)
+
+Linear is vary simple and easy search algorithms. In this type of search, a sequnetial search is made over all items one by one. Every item is checked and if a match is found then that particular item is returned, otherwise the search continues till the end of the data collection.
+
+**_Linear Search Algorithms :_**
+
+    linear serach(array[size],value)
+
+    step 1: set i = 0
+    step 2: i > size then goto step 5
+    step 3: array[i] is equal value ? return i : next step;
+    step 4: increase 1 value of i and goto step 2
+    step 5: return -1
+    step 6: end
+
+**_Example of Linear Search :_**
+
+```c
+#include <stdio.h>
+#include <time.h>
+
+// function prototype
+int linear_search(int size,int target,int array[size]);
+
+int main(void){
+    // create variable for calculate time
+    time_t start_time,end_time;
+    double elapsed_time;
+    start_time = clock();
+
+    // create numbers list
+    int numbers[] = { 2,45,43,343,21,234,325,2345,216,219 };
+
+    // try linear search on numbers
+    printf("try 33 find in numbers, index = %d\n",linear_search(10,33,numbers));
+    printf("try 43 find in numbers, index = %d\n",linear_search(10,43,numbers));
+    printf("try 2345 find in numbers, index = %d\n",linear_search(10,2345,numbers));
+    printf("try 222 find in numbers, index = %d\n",linear_search(10,222,numbers));
+
+    end_time = clock();
+    elapsed_time = (double)(end_time - start_time)/1000;
+    printf("\n\n--\n-\n>>>> Program Finish in %lf Secound.\n",elapsed_time);
+    return 0;
+}
+
+// linear_search function
+int linear_search(int size,int target,int array[size]){
+    /**
+     * target -> find this number index in array
+     * size -> size of array
+     * array -> store some data where we search
+     *
+     * */
+
+    // if find the number return index or return -1
+
+    // logic -> linear search
+    int index;
+    for(index = 0; index < size;index++){
+        if(array[index] == target){
+            return index;
+        }
+    }
+    return -1;
+
+    // logic -> another logic of linear search
+    index = 0;
+    while(index < size){
+        if(array[index++] == target){
+            return index - 1;
+        }
+    }
+    return -1;
+}
+```
+
+**_Time and Space Complexity :_**
+
+Worst Case Time complaxity is O(n) and space complexity is O(1).
+
+Space complexity is O(1) because here space is constant. One more thing, here array can not include space complexity beacuse this is not part of algorithm space.
+
+Linear Search is Sequential Searching Algorithms.
+
+## Binary_Search
+
+![Binary Search](./asset/icon/algorithms-binary-search.svg)
+
+Search a sorted array repeatedly dividing the search interval in half.Begin with an interval covering the whole array if the value of the search key is less then the item the middle of the interval, narrow the interval to lower half. Otherwise, narrow it to the upper half. Repeatedly check until the value is found or the interval is empty.
+
+**_Binary Search Algorithms :_**
+
+    input :
+    1. sorted array(array),
+    3. left value(left) where search is start,
+    4. right value(right) where search is end,
+    5. value(target) which is searing in array
+
+    ouput :
+    return index number if value(target) is found in array otherwise return -1
+
+    algorithm :
+    step 1: left > right ? then go step 7
+    step 2: middle = (left+right) / 2
+    step 3: array[middle] == target ? then got step 6
+    step 4: array[middle] > target ? then right = middle - 1 and go step 1
+    step 5 : array[middle] < target ? then left = middle + 1 and go step 1
+    step 6: return middle as a index
+    step 7: return -1 to message target is not found.
+
+**_Example Of Binary Search :_**
+
+```c
+#include <stdio.h>
+#include <time.h>
+
+// function prototype
+int binary_search(int array[],int left,int right,int target);
+
+int main(void){
+    // create necessary variable
+    time_t start_time = clock();
+    time_t end_time;
+    double elapsed_time;
+
+    int size = 12;
+    int numbers[] = {
+        12,15,19,20,24,27,33,55,102,156,302,492
+    };
+
+    printf("%d hase index in = %d\n",12,binary_search(numbers,0,size-1,12));
+    printf("%d hase index in = %d\n",302,binary_search(numbers,0,size-1,302));
+    printf("%d hase index in = %d\n",500,binary_search(numbers,0,size-1,500));
+    printf("%d hase index in = %d\n",22,binary_search(numbers,0,size-1,22));
+    printf("%d hase index in = %d\n",156,binary_search(numbers,0,size-1,156));
+
+
+    // calculate time
+    end_time = clock();
+    elapsed_time = (double) (end_time - start_time) / 1000;
+
+    printf("\n\n---\n--\n-\n>>>> Program finish in %lf Secound\n",elapsed_time);
+
+    return 0;
+}
+
+// binary_search function
+int binary_search(
+    int array[], // array where search the value
+    int left, // index where search is started
+    int right, // index where search is ended
+    int target // which one search in array
+){
+    // create necessary variable
+    int middle;
+
+   // logic --> Binary Search
+    while (left <= right)
+    {
+        middle = (left+right) / 2;
+
+        if(array[middle] == target){
+            return middle;
+        }else if(target < array[middle]){
+            right = middle - 1;
+        }else{
+            left = middle + 1;
+        }
+    }
+    return -1;
+
+}
+```
+
+**_Time and Space complaxity :_**
+Space complaxity is **_O(1)_**. Beacuse here array dose not part of algorithm.
+
+Worst Case Time Complaxity is **_O(log n)_** and good case time complaxity is **_O(1)_**
+
+Binary Search is Interval Searching Algorithms.
